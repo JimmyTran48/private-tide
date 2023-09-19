@@ -10,7 +10,9 @@
  */
 
 const createSchool = require('./middleware/createSchool');
+const getAllSchools = require('./middleware/getAllSchools');
 
 module.exports = {
   createSchool,
+  getAllSchools,
 };
