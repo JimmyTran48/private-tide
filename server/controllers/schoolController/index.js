@@ -9,6 +9,8 @@
  * **************************************************
  */
 
+const createSchool = require('./middleware/createSchool');
+
 module.exports = {
-  
-}
+  createSchool,
+};
