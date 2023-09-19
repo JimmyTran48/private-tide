@@ -24,7 +24,7 @@ const createSchool = async (req, res, next) => {
   const id = uuidv4();
 
   const query = 'INSERT INTO schools (id, name) VALUES ($1, $2)';
-  const school = await db.query(query, [id, name]);
+  await db.query(query, [id, name]);
 
   return next();
 };
