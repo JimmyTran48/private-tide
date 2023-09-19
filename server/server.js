@@ -7,6 +7,8 @@ const PORT = 3000;
 //  routes
 const api = require('./routes/api');
 
+app.use(express.json());
+
 app.use('/api', api);
 
 app.get('/*', (_, res) => {
