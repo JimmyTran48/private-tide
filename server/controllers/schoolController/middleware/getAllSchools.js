@@ -22,7 +22,7 @@ const getAllSchools = async (req, res, next) => {
 
   const schools = await db.query(query);
 
-  res.locals.schools = schools;
+  res.locals.schools = schools.rows;
 
   return next();
 };
