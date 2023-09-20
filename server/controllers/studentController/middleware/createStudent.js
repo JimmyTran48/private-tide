@@ -32,8 +32,10 @@ const createStudent = async (req, res, next) => {
 
   const id = uuidv4();
 
-  const query =
-    'INSERT INTO students (id, first_name, last_name, school_id, teacher_id, instrument, email, phone_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);';
+  const query = `
+    INSERT INTO students (id, first_name, last_name, school_id, teacher_id, instrument, email, phone_number)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8);
+    `;
   const params = [
     id,
     first_name,
