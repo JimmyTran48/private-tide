@@ -29,7 +29,9 @@ const getStudents = async (req, res, next) => {
   `;
   const params = [teacher_id];
 
-  await db.query(query, params);
+  const students = await db.query(query, params);
+
+  res.locals.students = students.rows;
 
   return next();
 };
