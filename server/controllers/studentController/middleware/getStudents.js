@@ -34,4 +34,4 @@ const getStudents = async (req, res, next) => {
   return next();
 };
 
-module.exports = createStudent;
+module.exports = getStudents;
