@@ -14,7 +14,7 @@ router.post(
   }
 );
 
-router.patch('/', teacherController.updateTeacher, (req, res) => {
+router.patch('/:username', teacherController.updateTeacher, (req, res) => {
   return res.sendStatus(204);
 });
 

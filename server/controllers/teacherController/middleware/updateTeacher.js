@@ -22,7 +22,7 @@ const updateTeacher = async (req, res, next) => {
   const { first_name, last_name } = req.body;
 
   const query =
-    'UPDATE teachers SET first_name = $2, last_name = $3, WHERE username = $1;';
+    'UPDATE teachers SET first_name = $2, last_name = $3 WHERE username = $1;';
   const params = [username, first_name, last_name];
 
   await db.query(query, params);
