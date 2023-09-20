@@ -10,7 +10,9 @@
  */
 
 const createTeacher = require('./middleware/createTeacher');
+const updateTeacher = require('./middleware/updateTeacher');
 
 module.exports = {
-  createTeacher
+  createTeacher,
+  updateTeacher,
 };
