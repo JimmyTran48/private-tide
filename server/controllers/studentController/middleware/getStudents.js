@@ -18,7 +18,7 @@ const db = require('../../../database');
  */
 
 const getStudents = async (req, res, next) => {
-  const { teacher_id } = req.body;
+  const { teacher_id } = req.params;
 
   const query = `
   SELECT students.first_name, students.last_name, schools.name, students.lesson_status,
