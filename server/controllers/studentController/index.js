@@ -11,8 +11,10 @@
 
 const createStudent = require('./middleware/createStudent');
 const getStudents = require('./middleware/getStudents');
+const updateStudent = require('./middleware/updateStudent');
 
 module.exports = {
   createStudent,
   getStudents,
+  updateStudent,
 };
