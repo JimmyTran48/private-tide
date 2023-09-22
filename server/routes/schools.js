@@ -4,7 +4,7 @@ const router = express.Router();
 
 const schoolController = require('../controllers/schoolController');
 
-router.get('/', schoolController.getAllSchools, (req, res) => {
+router.get('/', schoolController.getSchools, (req, res) => {
   return res.status(200).json(res.locals.schools);
 });
 
