@@ -1,7 +1,7 @@
 /**
  * **************************************************
  *
- * @module schoolController.getAllSchools
+ * @module schoolController.getSchools
  *
  * @description
  * Retrieves all school names from database
@@ -17,7 +17,7 @@ const db = require('../../../database');
  * ====================================
  */
 
-const getAllSchools = async (req, res, next) => {
+const getSchools = async (req, res, next) => {
   const query = 'SELECT name FROM SCHOOLS;';
 
   const schools = await db.query(query);
@@ -27,4 +27,4 @@ const getAllSchools = async (req, res, next) => {
   return next();
 };
 
-module.exports = getAllSchools;
+module.exports = getSchools;
