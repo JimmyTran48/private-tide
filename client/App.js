@@ -13,6 +13,8 @@ import SchoolsPage from './pages/SchoolsPage';
 import StudentsPage from './pages/StudentsPage';
 import UserHomePage from './pages/UserHomePage';
 
+import './styles.css';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootPage />}>
@@ -25,7 +27,7 @@ const router = createBrowserRouter(
       <Route path='/schools' element={<SchoolsPage />} />
 
       {/* 404 Page */}
-      <Route path="*" element={<NotFound />} />
+      <Route path='*' element={<NotFound />} />
     </Route>
   )
 );
