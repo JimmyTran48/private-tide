@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   RouterProvider,
   Route,
@@ -7,6 +8,7 @@ import {
 
 import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
+import RootPage from './pages/RootPage';
 import SchoolsPage from './pages/SchoolsPage';
 import StudentsPage from './pages/StudentsPage';
 import UserHomePage from './pages/UserHomePage';
@@ -15,15 +17,15 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootPage />}>
       {/* Public Routes */}
-      <Route exact path='/' element={HomePage} />
+      <Route exact path='/' element={<HomePage />} />
 
       {/* Authenticated Routes */}
-      <Route path='/home' element={UserHomePage} />
-      <Route path='/students' element={StudentsPage} />
-      <Route path='/schools' element={SchoolsPage} />
+      <Route path='/home' element={<UserHomePage />} />
+      <Route path='/students' element={<StudentsPage />} />
+      <Route path='/schools' element={<SchoolsPage />} />
 
       {/* 404 Page */}
-      <Route component={NotFound} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
