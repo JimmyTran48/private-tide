@@ -1,15 +1,18 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 
+import Navbar from '../../components/navigation/Navbar';
+
 const RootPage = () => {
   return (
     <React.Fragment>
-      <h1>Hello World!</h1>
+      <Navbar />
       <main>
         <Outlet />
       </main>
     </React.Fragment>
   );
 };
+
 
 export default RootPage;
