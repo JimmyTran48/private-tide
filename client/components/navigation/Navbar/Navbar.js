@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { Button, Avatar, Menu, MenuItem } from '@mui/material';
 
-const Navbar = (props) => {
+const Navbar = () => {
   const [auth, setAuth] = useState(false);
   const [menuAnchor, setMenuAnchor] = useState(null);
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const Navbar = (props) => {
       </Button>
     </React.Fragment>
   );
-  console.log(props);
+
   return (
     <nav className='bg-blue-600 text-white flex justify-around items-center h-16'>
       <div>
