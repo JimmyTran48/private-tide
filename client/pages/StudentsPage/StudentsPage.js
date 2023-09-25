@@ -23,23 +23,21 @@ const StudentsPage = () => {
   const h3Class = 'text-xl font-semibold mb-2';
 
   return (
-    <div className='w-screen' style={{ height: '85vh' }}>
-      <div className='w-11/12 mx-auto  pt-48'>
-        <Slider {...settings} className=''>
-          {students.map((student, index) => (
-            <div key={index} className={divClass}>
-              <h3 className={h3Class}>
-                {student.first_name} {student.last_name}
-              </h3>
-            </div>
-          ))}
-        </Slider>
-        <Button
-          variant='contained'
-          style={{ marginTop: '1rem', marginLeft: '4rem' }}>
-          New Student
-        </Button>
-      </div>
+    <div className='w-11/12 mx-auto my-48 p-5 border border-blue-600 rounded-lg'>
+      <Slider {...settings} className=''>
+        {students.map((student, index) => (
+          <div key={index} className={divClass}>
+            <h3 className={h3Class}>
+              {student.first_name} {student.last_name}
+            </h3>
+          </div>
+        ))}
+      </Slider>
+      <Button
+        variant='contained'
+        style={{ marginTop: '1rem', marginLeft: '4rem' }}>
+        New Student
+      </Button>
     </div>
   );
 };
