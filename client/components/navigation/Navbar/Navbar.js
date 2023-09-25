@@ -42,51 +42,58 @@ const Navbar = () => {
   ) : (
     <React.Fragment>
       <Button
-        // color='secondary'
-        style={{ color: 'white', fontSize: '.875rem' }}
-        variant='text'
+        className='text-white text-sm bg-blue-800 hover:bg-blue-700'
+        variant='contained'
         onClick={handleLogin}>
         Log In
       </Button>
-      <Button color='secondary' variant='contained'>
+      <Button className='text-white' variant='contained'>
         Sign Up
       </Button>
     </React.Fragment>
   );
 
   return (
-    <nav className='bg-blue-600 text-white flex justify-around items-center h-16'>
+    <nav className='bg-blue-600 text-white flex justify-between items-center h-16 px-6'>
       <div>
-        <Link to={auth ? '/home' : '/'}>Private Tide</Link>
+        <Link to={auth ? '/home' : '/'} className='text-2xl font-bold'>
+          Private Tide
+        </Link>
       </div>
       {auth && (
         <div>
-          <ul className='flex justify-around w-80'>
+          <ul className='flex space-x-6'>
             <li>
               <NavLink
                 to='/home'
-                className={({ isActive }) => (isActive ? 'underline' : '')}>
+                className={({ isActive }) =>
+                  isActive ? 'underline' : 'hover:underline'
+                }>
                 Home
               </NavLink>
             </li>
             <li>
               <NavLink
                 to='/students'
-                className={({ isActive }) => (isActive ? 'underline' : '')}>
+                className={({ isActive }) =>
+                  isActive ? 'underline' : 'hover:underline'
+                }>
                 Students
               </NavLink>
             </li>
             <li>
               <NavLink
                 to='/schools'
-                className={({ isActive }) => (isActive ? 'underline' : '')}>
+                className={({ isActive }) =>
+                  isActive ? 'underline' : 'hover:underline'
+                }>
                 Schools
               </NavLink>
             </li>
           </ul>
         </div>
       )}
-      <div className='flex justify-around w-48'>{authDiv}</div>
+      <div className='flex space-x-4'>{authDiv}</div>
     </nav>
   );
 };
