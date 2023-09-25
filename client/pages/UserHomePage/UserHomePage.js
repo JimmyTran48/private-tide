@@ -20,24 +20,28 @@ const UserHomePage = () => {
     vertical: true,
   };
 
-  const slides = [];
-  for (let i = 0; i < students.length; i++) {
-    const student = students[i];
-    let className = 'h-20 ';
-    className += student.unpaid ? 'bg-red-300' : 'bg-purple-300';
+  const slides = students.map((student, index) => {
+    // if (student.unpaid) {
+    //   className += ` bg-red-200`;
+    // }
 
-    slides.push(
-      <Slide>
-        <div className={className}>
-          <h3>
+    return (
+      <Slide key={index} status={student.unpaid ? 'red' : 'green'}>
+        <div className='h-16'>
+          <h3 className='text-lg font-semibold'>
             {student.first_name} {student.last_name}
           </h3>
-          <p>{student.school}</p>
-          {student.unpaid && <span>Balance overdue</span>}
+          <p className='mb-2'>{student.school}</p>
+          {student.unpaid && (
+            <span className='text-red-500'>Balance overdue</span>
+          )}
+          {!student.unpaid && (
+            <span className='text-green-500'>Balance paid</span>
+          )}
         </div>
       </Slide>
     );
-  }
+  });
 
   return (
     <div
@@ -47,7 +51,7 @@ const UserHomePage = () => {
       <MoneyDisplay />
       {/* A scroll list of students */}
       <div
-        className='bg-green-300 col-span-1 overflow-hidden'
+        className='rounded-lg shadow-lg overflow-hidden px-4 border-2 border-gray-400'
         style={{ maxHeight: '76.75vh' }}>
         <Slider {...settings}>{slides}</Slider>
       </div>
