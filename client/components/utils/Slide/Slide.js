@@ -3,8 +3,8 @@ import React from 'react';
 const Slide = ({ children, image, status }) => {
   let className = 'p-4 rounded-lg shadow-md text-center my-0.5 ';
 
-  if (status === 'green') className += 'bg-green-200';
-  if (status === 'red') className += 'bg-red-200';
+  if (status === 'green') className += 'bg-green-200 ';
+  if (status === 'red') className += 'bg-red-200 ';
 
   return (
     <div className={className}>
