@@ -4,7 +4,7 @@ const initialState = {
   information: {
     id: null,
     first_name: null,
-    last_name,
+    last_name: null,
   },
   schools: [],
   students: [],
@@ -28,6 +28,6 @@ export const teacherSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { updateInformation, updateSchools, getStudents } =
-  counterSlice.actions;
+  teacherSlice.actions;
 
 export default teacherSlice.reducer;
