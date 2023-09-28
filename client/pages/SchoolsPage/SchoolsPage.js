@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import StudentCount from '../../components/StudentCount';
 
-import schoolsData from '../../data/schools';
-
 const SchoolsPage = () => {
-  const [schools] = useState(schoolsData);
-  
+  const schools = useSelector((state) => state.teacher.schools);
+
   return (
     <div className='container mx-auto p-4'>
       <h2 className='text-2xl font-bold mb-4'>Schools</h2>

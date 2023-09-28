@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-
-import studentsData from '../../data/students';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const StudentCount = ({ schoolName }) => {
-  const [students] = useState(studentsData);
+  const students = useSelector((state) => state.teacher.students);
 
   const studentCount = students.filter(
     (student) => student.school === schoolName

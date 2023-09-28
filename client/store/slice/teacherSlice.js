@@ -1,13 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import schoolsData from '../../data/schools';
+import studentsData from '../../data/students';
+
 const initialState = {
   information: {
     id: null,
     first_name: null,
     last_name: null,
   },
-  schools: [],
-  students: [],
+  schools: schoolsData,
+  students: studentsData,
 };
 
 export const teacherSlice = createSlice({

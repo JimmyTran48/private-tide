@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+
 import Slider from 'react-slick';
 
 import Slide from '../../components/utils/Slide';
 
-import studentsArray from '../../data/students';
 import MoneyDisplay from '../../components/MoneyDisplay/MoneyDisplay';
 
 const UserHomePage = () => {
-  const [students] = useState(studentsArray);
+  const students = useSelector((state) => state.teacher.students);
 
   const settings = {
     infinite: true,
