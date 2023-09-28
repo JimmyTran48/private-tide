@@ -9,7 +9,7 @@ const initialState = {
     first_name: null,
     last_name: null,
   },
-  schools: schoolsData,
+  schools: [],
   students: studentsData,
 };
 
@@ -18,10 +18,10 @@ export const teacherSlice = createSlice({
   initialState,
   reducers: {
     updateInformation: (state, action) => {
-      return (state.information = { ...state.information, ...action.payload });
+      state.information = { ...state.information, ...action.payload };
     },
     updateSchools: (state, action) => {
-      return state.schools.push(...action.payload);
+      state.schools.push(...action.payload);
     },
     getStudents: (state, action) => {
       state.students = action.payload;
