@@ -4,11 +4,7 @@ import schoolsData from '../../data/schools';
 import studentsData from '../../data/students';
 
 const initialState = {
-  information: {
-    id: null,
-    first_name: null,
-    last_name: null,
-  },
+  information: null,
   schools: [],
   students: studentsData,
 };
@@ -18,7 +14,7 @@ export const teacherSlice = createSlice({
   initialState,
   reducers: {
     updateInformation: (state, action) => {
-      state.information = { ...state.information, ...action.payload };
+      state.information = action.payload;
     },
     updateSchools: (state, action) => {
       state.schools.push(...action.payload);
