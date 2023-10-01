@@ -18,7 +18,10 @@ const db = require('../../../database');
  */
 
 const getSchools = async (req, res, next) => {
-  const query = 'SELECT name FROM SCHOOLS;';
+  const query = `
+    SELECT name
+    FROM SCHOOLS;
+  `;
 
   const schools = await db.query(query);
 

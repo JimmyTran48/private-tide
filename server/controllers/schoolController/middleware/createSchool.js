@@ -20,8 +20,13 @@ const db = require('../../../database');
 const createSchool = async (req, res, next) => {
   const { name } = req.body;
 
-  const query = 'INSERT INTO schools (name) VALUES ($1);';
-  await db.query(query, [name]);
+  const query = `
+    INSERT INTO schools (name)
+    VALUES ($1);
+  `;
+  const params = [name];
+
+  await db.query(query, params);
 
   return next();
 };

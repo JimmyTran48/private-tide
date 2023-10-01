@@ -22,11 +22,13 @@ const updateLesson = async (req, res, next) => {
   const { payment_status } = req.body;
 
   const query = `
-  UPDATE lessons
-  SET payment_status = $2
-  WHERE id = $1;
+    UPDATE lessons
+    SET payment_status = $2
+    WHERE id = $1;
   `;
-  await db.query(query, [id, payment_status]);
+  const params = [id, payment_status];
+
+  await db.query(query, params);
 
   return next();
 };

@@ -24,8 +24,10 @@ const createTeacher = async (req, res, next) => {
   const { hashedPassword: password } = res.locals;
   const id = uuidv4();
 
-  const query =
-    'INSERT INTO teachers (id, username, password, first_name, last_name) VALUES ($1, $2, $3, $4, $5);';
+  const query = `
+    INSERT INTO teachers (id, username, password, first_name, last_name)
+    VALUES($1, $2, $3, $4, $5);
+  `;
   const params = [id, username, password, first_name, last_name];
 
   await db.query(query, params);

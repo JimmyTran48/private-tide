@@ -33,10 +33,10 @@ const updateStudent = async (req, res, next) => {
   } = req.body;
 
   const query = `
-  UPDATE students
-  SET first_name = $2, last_name = $3, school_id = $4, teacher_id = $5,
-  lesson_status = $6, instrument = $7, payment_method = $8, email = $9, phone_number = $10
-  WHERE id = $1;
+    UPDATE students
+    SET first_name = $2, last_name = $3, school_id = $4, teacher_id = $5,
+    lesson_status = $6, instrument = $7, payment_method = $8, email = $9, phone_number = $10
+    WHERE id = $1;
   `;
   const params = [
     id,
