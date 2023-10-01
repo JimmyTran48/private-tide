@@ -26,11 +26,13 @@ const createTeacher = async (req, res, next) => {
 
   const query = `
     INSERT INTO teachers (id, username, password, first_name, last_name)
-    VALUES($1, $2, $3, $4, $5);
+    VALUES($1, $2, $3, $4, $5)
+    RETURNING *;
   `;
   const params = [id, username, password, first_name, last_name];
 
-  await db.query(query, params);
+  const teacher = await db.query(query, params);
+  res.locals.teacher = teacher.rows[0];
 
   return next();
 };

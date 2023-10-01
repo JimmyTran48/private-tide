@@ -10,7 +10,11 @@ router.post(
   authController.hashPassword,
   teacherController.createTeacher,
   (req, res) => {
-    return res.sendStatus(201);
+    return res.status(201).json({
+      id: res.locals.teacher.id,
+      first_name: res.locals.teacher.first_name,
+      last_name: res.locals.teacher.last_name,
+    });
   }
 );
 

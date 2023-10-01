@@ -15,7 +15,12 @@ const SignupModal = ({ close }) => {
       }}
       className='flex items-center justify-center'>
       <div className='bg-white p-8 rounded shadow-lg'>
-        <SignupForm />
+        <SignupForm
+          close={() => {
+            setOpen(false);
+            close();
+          }}
+        />
       </div>
     </Modal>
   );
