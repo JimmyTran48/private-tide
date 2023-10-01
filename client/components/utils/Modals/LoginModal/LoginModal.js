@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '@mui/material';
+import LoginForm from '../../../forms/LoginForm/LoginForm';
 
 const LoginModal = ({ close }) => {
   const [open, setOpen] = useState(true);
@@ -13,8 +14,7 @@ const LoginModal = ({ close }) => {
       }}
       className='flex items-center justify-center'>
       <div className='bg-white p-8 rounded shadow-lg'>
-        <h2>Login</h2>
-        <p>Login form goes here</p>
+        <LoginForm />
       </div>
     </Modal>
   );
