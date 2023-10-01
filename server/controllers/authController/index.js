@@ -10,7 +10,9 @@
  */
 
 const hashPassword = require('./middleware/hashPassword');
+const validatePassword = require('./middleware/validatePassword');
 
 module.exports = {
   hashPassword,
+  validatePassword,
 };

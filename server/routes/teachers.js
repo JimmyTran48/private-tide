@@ -18,6 +18,14 @@ router.post(
   }
 );
 
+router.post('/auth', authController.validatePassword, (req, res) => {
+  return res.status(200).json({
+    id: res.locals.teacher.id,
+    first_name: res.locals.teacher.first_name,
+    last_name: res.locals.teacher.last_name,
+  });
+});
+
 router.patch('/:username', teacherController.updateTeacher, (req, res) => {
   return res.sendStatus(204);
 });
