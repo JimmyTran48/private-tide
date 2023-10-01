@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '@mui/material';
+
 import LoginForm from '../../../forms/LoginForm/LoginForm';
 
 const LoginModal = ({ close }) => {
