@@ -1,10 +1,35 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
-const LoginForm = () => {
+import { updateInformation } from '../../../store/slice/teacherSlice';
+
+const LoginForm = ({ close }) => {
+  const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+
+  const onSubmit = async (formData) => {
+    const { username, password } = formData;
+    const response = await fetch('/api/teachers/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    const data = await response.json();
+
+    dispatch((dispatch) => {
+      dispatch(updateInformation(data));
+    });
+
+    close();
+  };
+
   return (
     <div className='w-72 mx-auto bg-white p-8 rounded-lg shadow-lg'>
       <h2 className='text-2xl font-bold mb-6 text-center'>Login</h2>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className='mb-4'>
           <label htmlFor='username' className='block font-semibold mb-2'>
             Username
@@ -14,6 +39,7 @@ const LoginForm = () => {
             id='username'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your username'
+            {...register('username')}
           />
         </div>
         <div className='mb-6'>
@@ -25,6 +51,7 @@ const LoginForm = () => {
             id='password'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your password'
+            {...register('password')}
           />
         </div>
         <button
