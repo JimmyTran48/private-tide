@@ -17,7 +17,7 @@ export const teacherSlice = createSlice({
       state.information = action.payload;
     },
     updateSchools: (state, action) => {
-      state.schools.push(...action.payload);
+      state.schools = action.payload;
     },
     getStudents: (state, action) => {
       state.students = action.payload;
