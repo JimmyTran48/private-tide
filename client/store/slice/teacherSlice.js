@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import studentsData from '../../data/students';
-
 const initialState = {
   information: null,
   schools: [],
-  students: studentsData,
+  students: [],
 };
 
 export const teacherSlice = createSlice({
@@ -18,14 +16,14 @@ export const teacherSlice = createSlice({
     updateSchools: (state, action) => {
       state.schools = action.payload;
     },
-    getStudents: (state, action) => {
+    updateStudents: (state, action) => {
       state.students = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateInformation, updateSchools, getStudents } =
+export const { updateInformation, updateSchools, updateStudents } =
   teacherSlice.actions;
 
 export default teacherSlice.reducer;

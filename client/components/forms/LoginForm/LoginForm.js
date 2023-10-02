@@ -2,7 +2,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-import { updateInformation } from '../../../store/slice/teacherSlice';
+import {
+  updateInformation,
+  updateStudents,
+} from '../../../store/slice/teacherSlice';
 
 const LoginForm = ({ close }) => {
   const { register, handleSubmit } = useForm();
@@ -18,12 +21,23 @@ const LoginForm = ({ close }) => {
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
+    const students = await getStudents(data.id);
 
     dispatch((dispatch) => {
       dispatch(updateInformation(data));
     });
 
+    dispatch((dispatch) => {
+      dispatch(updateStudents(students));
+    });
+
     close();
+  };
+
+  const getStudents = async (teacher_id) => {
+    const response = await fetch(`/api/students/${teacher_id}`);
+    const data = await response.json();
+    return data;
   };
 
   return (

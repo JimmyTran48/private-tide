@@ -35,18 +35,21 @@ const Navbar = () => {
     <LoginModal
       close={() => {
         setShowLogin(false);
+        setMenuAnchor(null);
       }}
     />
   ) : showSignup ? (
     <SignupModal
       close={() => {
         setShowSignup(false);
+        setMenuAnchor(null);
       }}
     />
   ) : showDetails ? (
     <DetailsModal
       close={() => {
         setShowDetails(false);
+        setMenuAnchor(null);
       }}
     />
   ) : null;
