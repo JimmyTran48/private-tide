@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '@mui/material';
 
-import SignupForm from '../../../forms/SignupForm/SignupForm';
+import SignupForm from '../../../forms/SignupForm';
 
 const SignupModal = ({ close }) => {
   const [open, setOpen] = useState(true);
