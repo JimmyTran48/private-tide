@@ -13,6 +13,8 @@ import SchoolsPage from './pages/SchoolsPage';
 import StudentsPage from './pages/StudentsPage';
 import UserHomePage from './pages/UserHomePage';
 
+import PrivateRoute from './components/navigation/PrivateRoute/PrivateRoute';
+
 import './styles.css';
 
 const router = createBrowserRouter(
@@ -22,9 +24,30 @@ const router = createBrowserRouter(
       <Route exact path='/' element={<HomePage />} />
 
       {/* Authenticated Routes */}
-      <Route path='/home' element={<UserHomePage />} />
-      <Route path='/students' element={<StudentsPage />} />
-      <Route path='/schools' element={<SchoolsPage />} />
+      <Route
+        path='/home'
+        element={
+          <PrivateRoute>
+            <UserHomePage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path='/students'
+        element={
+          <PrivateRoute>
+            <StudentsPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path='/schools'
+        element={
+          <PrivateRoute>
+            <SchoolsPage />
+          </PrivateRoute>
+        }
+      />
 
       {/* 404 Page */}
       <Route path='*' element={<NotFound />} />
