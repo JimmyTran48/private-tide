@@ -22,10 +22,6 @@ const UserHomePage = () => {
   };
 
   const slides = students.map((student, index) => {
-    // if (student.unpaid) {
-    //   className += ` bg-red-200`;
-    // }
-
     return (
       <Slide key={index} status={student.unpaid ? 'red' : 'green'}>
         <div className='h-16'>

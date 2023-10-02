@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
-
-import lessonData from '../../data/lessons';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import calculateBalance from '../../utils/calculateBalance';
 
 const MoneyDisplay = () => {
-  const [lessons] = useState(lessonData);
+  const teacher_id = useSelector((state) => state.teacher.information.id);
+
+  const [lessons, setLessons] = useState([]);
+
+  useEffect(() => {
+    const getLessons = async () => {
+      const response = await fetch(`/api/lessons/${teacher_id}`);
+      const data = await response.json();
+
+      setLessons(data);
+    };
+
+    getLessons();
+  }, []);
 
   const [paid, owed] = calculateBalance(lessons);
 
