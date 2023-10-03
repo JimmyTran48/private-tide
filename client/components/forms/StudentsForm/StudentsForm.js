@@ -40,6 +40,9 @@ const StudentsForm = () => {
           <select
             id='school'
             className='w-full p-2 border border-gray-300 rounded'>
+            <option disabled selected>
+              Select School
+            </option>
             {options}
           </select>
         </div>
