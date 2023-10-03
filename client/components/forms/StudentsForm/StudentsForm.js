@@ -1,16 +1,35 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 const StudentsForm = () => {
+  const teacher_id = useSelector((state) => state.teacher.information.id);
   const schools = useSelector((state) => state.teacher.schools);
 
+  const { register, handleSubmit } = useForm();
+
   const options = schools.map((school) => {
-    return <option value={school.id}>{school.name}</option>;
+    return (
+      <option value={school.id} key={school.id}>
+        {school.name}
+      </option>
+    );
   });
+
+  const onSubmit = async (data) => {
+    fetch('/api/students', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...data, teacher_id }),
+    });
+  };
+
   return (
     <div className='w-72 mx-auto bg-white p-8 rounded-lg shadow-lg'>
       <h2 className='text-2xl font-bold mb-6 text-center'>Registration</h2>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className='mb-4'>
           <label htmlFor='firstName' className='block font-semibold mb-2'>
             First Name
@@ -20,6 +39,7 @@ const StudentsForm = () => {
             id='firstName'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your first name'
+            {...register('first_name')}
           />
         </div>
         <div className='mb-4'>
@@ -31,6 +51,7 @@ const StudentsForm = () => {
             id='lastName'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your last name'
+            {...register('last_name')}
           />
         </div>
         <div className='mb-4'>
@@ -39,10 +60,10 @@ const StudentsForm = () => {
           </label>
           <select
             id='school'
-            className='w-full p-2 border border-gray-300 rounded'>
-            <option disabled selected>
-              Select School
-            </option>
+            className='w-full p-2 border border-gray-300 rounded'
+            defaultValue={'Select School'}
+            {...register('school_id')}>
+            <option disabled>Select School</option>
             {options}
           </select>
         </div>
@@ -55,6 +76,7 @@ const StudentsForm = () => {
             id='instrument'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your instrument'
+            {...register('instrument')}
           />
         </div>
         <div className='mb-4'>
@@ -66,6 +88,7 @@ const StudentsForm = () => {
             id='email'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your email'
+            {...register('email')}
           />
         </div>
         <div className='mb-6'>
@@ -77,6 +100,7 @@ const StudentsForm = () => {
             id='phoneNumber'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your phone number'
+            {...register('phone_number')}
           />
         </div>
         <button
