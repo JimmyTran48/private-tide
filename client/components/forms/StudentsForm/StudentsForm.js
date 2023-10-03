@@ -1,6 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const StudentsForm = () => {
+  const schools = useSelector((state) => state.teacher.schools);
+
+  const options = schools.map((school) => {
+    return <option value={school.id}>{school.name}</option>;
+  });
   return (
     <div className='w-72 mx-auto bg-white p-8 rounded-lg shadow-lg'>
       <h2 className='text-2xl font-bold mb-6 text-center'>Registration</h2>
@@ -34,9 +40,7 @@ const StudentsForm = () => {
           <select
             id='school'
             className='w-full p-2 border border-gray-300 rounded'>
-            <option value='school1'>School 1</option>
-            <option value='school2'>School 2</option>
-            <option value='school3'>School 3</option>
+            {options}
           </select>
         </div>
         <div className='mb-4'>
