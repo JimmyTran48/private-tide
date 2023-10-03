@@ -19,7 +19,7 @@ const db = require('../../../database');
 
 const getSchools = async (req, res, next) => {
   const query = `
-    SELECT name
+    SELECT name, id
     FROM SCHOOLS;
   `;
 
