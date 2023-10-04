@@ -30,7 +30,6 @@ const getlessons = async (req, res, next) => {
 
   const lessons = await db.query(query, params);
 
-  console.log(lessons.rows);
   res.locals.lessons = lessons.rows;
 
   return next();
