@@ -1,22 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { updateSchools } from '../../store/slice/teacherSlice';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import StudentCount from '../../components/StudentCount';
 
 const SchoolsPage = () => {
   const schools = useSelector((state) => state.teacher.schools);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    async function fetchData(dispatch) {
-      const response = await fetch('/api/schools');
-      const data = await response.json();
-      dispatch(updateSchools(data));
-    }
-    dispatch(fetchData);
-  }, []);
 
   return (
     <div className='container mx-auto p-4'>

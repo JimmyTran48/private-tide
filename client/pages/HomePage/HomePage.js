@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Slider from 'react-slick';
 
 import SliderArrow from '../../components/utils/SliderArrow';
 import Slide from '../../components/utils/Slide';
 
+import { updateSchools } from '../../store/slice/teacherSlice';
+
 const HomePage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchData(dispatch) {
+      const response = await fetch('/api/schools');
+      const data = await response.json();
+      dispatch(updateSchools(data));
+    }
+    dispatch(fetchData);
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
