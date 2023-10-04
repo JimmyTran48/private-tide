@@ -24,7 +24,7 @@ const LoginForm = ({ close }) => {
     });
     const data = await response.json();
     const students = await fetchStudents(data.id);
-    console.log(students)
+
     dispatch((dispatch) => {
       dispatch(updateInformation(data));
     });
