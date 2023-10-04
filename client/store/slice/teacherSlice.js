@@ -26,7 +26,7 @@ export const teacherSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { updateInformation, updateSchools, getStudents } =
+export const { updateInformation, updateSchools, getStudents, addStudents } =
   teacherSlice.actions;
 
 export default teacherSlice.reducer;

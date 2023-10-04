@@ -1,10 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-const StudentsForm = () => {
+import { addStudents } from '../../../store/slice/teacherSlice';
+
+const StudentsForm = ({ close }) => {
   const teacher_id = useSelector((state) => state.teacher.information.id);
   const schools = useSelector((state) => state.teacher.schools);
+  const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
 
@@ -24,8 +27,14 @@ const StudentsForm = () => {
       },
       body: JSON.stringify({ ...data, teacher_id }),
     });
+
     const student = await response.json();
-    console.log(student);
+
+    dispatch((dispatch) => {
+      dispatch(addStudents(student));
+    });
+
+    close();
   };
 
   return (
