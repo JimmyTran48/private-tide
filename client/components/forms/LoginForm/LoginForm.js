@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import {
   updateInformation,
@@ -10,6 +11,7 @@ import {
 const LoginForm = ({ close }) => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (formData) => {
     const { username, password } = formData;
@@ -30,6 +32,8 @@ const LoginForm = ({ close }) => {
     dispatch((dispatch) => {
       dispatch(updateStudents(students));
     });
+
+    navigate('/home');
 
     close();
   };
