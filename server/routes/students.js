@@ -5,7 +5,7 @@ const router = express.Router();
 const studentController = require('../controllers/studentController');
 
 router.post('/', studentController.createStudent, (req, res) => {
-  return res.sendStatus(201);
+  return res.status(201).json(res.locals.student);
 });
 
 router.get('/:teacher_id', studentController.getStudents, (req, res) => {

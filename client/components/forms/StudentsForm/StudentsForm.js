@@ -17,13 +17,15 @@ const StudentsForm = () => {
   });
 
   const onSubmit = async (data) => {
-    fetch('/api/students', {
+    const response = await fetch('/api/students', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ ...data, teacher_id }),
     });
+    const student = await response.json();
+    console.log(student);
   };
 
   return (

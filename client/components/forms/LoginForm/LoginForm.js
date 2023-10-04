@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 
 import {
   updateInformation,
-  updateStudents,
+  getStudents,
 } from '../../../store/slice/teacherSlice';
 
 const LoginForm = ({ close }) => {
@@ -23,14 +23,14 @@ const LoginForm = ({ close }) => {
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
-    const students = await getStudents(data.id);
-
+    const students = await fetchStudents(data.id);
+    console.log(students)
     dispatch((dispatch) => {
       dispatch(updateInformation(data));
     });
 
     dispatch((dispatch) => {
-      dispatch(updateStudents(students));
+      dispatch(getStudents(students));
     });
 
     navigate('/home');
@@ -38,7 +38,7 @@ const LoginForm = ({ close }) => {
     close();
   };
 
-  const getStudents = async (teacher_id) => {
+  const fetchStudents = async (teacher_id) => {
     const response = await fetch(`/api/students/${teacher_id}`);
     const data = await response.json();
     return data;
