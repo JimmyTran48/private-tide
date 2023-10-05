@@ -3,11 +3,24 @@ import { useSelector } from 'react-redux';
 
 import { Modal } from '@mui/material';
 
-import StudentInfo from '../../../StudentInfo/StudentInfo';
+import StudentInfo from '../../../StudentInfo';
+import StudentLessons from '../../../StudentLessons';
+import UpdateStudentForm from '../../../forms/UpdateStudentForm';
 
 const InfoModal = ({ close, index }) => {
   const [open, setOpen] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [showLessons, setShowLessons] = useState(false);
+
   const student = useSelector((state) => state.teacher.students)[index];
+
+  const display = showForm ? (
+    <UpdateStudentForm />
+  ) : showLessons ? (
+    <StudentLessons />
+  ) : (
+    <StudentInfo {...student} />
+  );
 
   return (
     <Modal
