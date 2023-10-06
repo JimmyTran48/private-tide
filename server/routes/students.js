@@ -13,7 +13,7 @@ router.get('/:teacher_id', studentController.getStudents, (req, res) => {
 });
 
 router.patch('/:id', studentController.updateStudent, (req, res) => {
-  return res.sendStatus(204);
+  return res.status(200).json(res.locals.student);
 });
 
 module.exports = router;

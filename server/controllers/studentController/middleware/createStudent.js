@@ -38,7 +38,8 @@ const createStudent = async (req, res, next) => {
     VALUES($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *
   )
-  SELECT 
+  SELECT
+    inserted_student.id,
     inserted_student.first_name,
     inserted_student.last_name,
     inserted_student.instrument,
@@ -46,7 +47,7 @@ const createStudent = async (req, res, next) => {
     inserted_student.phone_number,
     inserted_student.lesson_status,
     inserted_student.payment_method,
-    schools.name as school_name
+    schools.name as school
   FROM 
     inserted_student
   JOIN 

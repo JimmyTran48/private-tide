@@ -22,11 +22,19 @@ export const teacherSlice = createSlice({
     addStudents: (state, action) => {
       state.students.push(action.payload);
     },
+    updateStudent: (state, action) => {
+      state.students[action.payload.index] = action.payload.updatedStudent;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateInformation, updateSchools, getStudents, addStudents } =
-  teacherSlice.actions;
+export const {
+  updateInformation,
+  updateSchools,
+  getStudents,
+  addStudents,
+  updateStudent,
+} = teacherSlice.actions;
 
 export default teacherSlice.reducer;
