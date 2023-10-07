@@ -50,7 +50,9 @@ const StudentsForm = ({ close }) => {
             id='firstName'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your first name'
-            {...register('first_name')}
+            {...register('first_name', {
+              required: true,
+            })}
           />
         </div>
         <div className='mb-4'>
@@ -62,7 +64,9 @@ const StudentsForm = ({ close }) => {
             id='lastName'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your last name'
-            {...register('last_name')}
+            {...register('last_name', {
+              required: true,
+            })}
           />
         </div>
         <div className='mb-4'>
@@ -73,7 +77,10 @@ const StudentsForm = ({ close }) => {
             id='school'
             className='w-full p-2 border border-gray-300 rounded'
             defaultValue={'Select School'}
-            {...register('school_id')}>
+            {...register('school_id', {
+              required: true,
+              validate: (value) => value !== 'Select School',
+            })}>
             <option disabled>Select School</option>
             {options}
           </select>
@@ -87,7 +94,9 @@ const StudentsForm = ({ close }) => {
             id='instrument'
             className='w-full p-2 border border-gray-300 rounded'
             placeholder='Enter your instrument'
-            {...register('instrument')}
+            {...register('instrument', {
+              required: true,
+            })}
           />
         </div>
         <div className='mb-4'>
