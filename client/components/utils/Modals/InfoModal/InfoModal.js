@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 
 import { Modal } from '@mui/material';
 
+import LessonDisplay from '../../../LessonDisplay';
 import StudentInfo from '../../../StudentInfo';
-import StudentLessons from '../../../StudentLessons';
 import UpdateStudentForm from '../../../forms/UpdateStudentForm';
 
 const InfoModal = ({ close, index }) => {
@@ -24,7 +24,7 @@ const InfoModal = ({ close, index }) => {
       index={index}
     />
   ) : showLessons ? (
-    <StudentLessons />
+    <LessonDisplay />
   ) : (
     <StudentInfo {...student} />
   );
