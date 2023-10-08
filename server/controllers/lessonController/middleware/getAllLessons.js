@@ -1,7 +1,7 @@
 /**
  * **************************************************
  *
- * @module lessonController.getlessons
+ * @module lessonController.getAllLessons
  *
  * @description
  * Selects all lessons for a specific teacher.
@@ -17,15 +17,16 @@ const db = require('../../../database');
  * ====================================
  */
 
-const getlessons = async (req, res, next) => {
-  const { student_id } = req.params;
+const getAllLessons = async (req, res, next) => {
+  const { teacher_id } = req.params;
 
   const query = `
-    SELECT id, lesson_date, payment_status, price
-    FROM lessons
-    WHERE student_id = $1;
+    SELECT student.first_name, student.last_name, lesson.lesson_date, lesson.price, lesson.payment_status
+    FROM lessons AS lesson
+    JOIN students AS student ON lesson.student_id = student.id
+    WHERE lesson.teacher_id = $1
   `;
-  const params = [student_id];
+  const params = [teacher_id];
 
   const lessons = await db.query(query, params);
 
@@ -34,4 +35,4 @@ const getlessons = async (req, res, next) => {
   return next();
 };
 
-module.exports = getlessons;
+module.exports = getAllLessons;

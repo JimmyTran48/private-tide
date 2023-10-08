@@ -8,7 +8,11 @@ router.post('/', lessonController.createLesson, (req, res) => {
   return res.sendStatus(201);
 });
 
-router.get('/:teacher_id', lessonController.getLessons, (req, res) => {
+router.get('/all/:teacher_id', lessonController.getAllLessons, (req, res) => {
+  return res.status(200).json(res.locals.lessons);
+});
+
+router.get('/:student_id', lessonController.getLessons, (req, res) => {
   return res.status(200).json(res.locals.lessons);
 });
 
