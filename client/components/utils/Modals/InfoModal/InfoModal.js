@@ -24,7 +24,7 @@ const InfoModal = ({ close, index }) => {
       index={index}
     />
   ) : showLessons ? (
-    <LessonDisplay />
+    <LessonDisplay student={student} />
   ) : (
     <StudentInfo {...student} />
   );
