@@ -23,7 +23,10 @@ export const teacherSlice = createSlice({
       state.students = sorted;
     },
     addStudents: (state, action) => {
-      state.students.push(action.payload);
+      const sorted = [...state.students, action.payload].sort((a, b) =>
+        a.first_name.localeCompare(b.first_name)
+      );
+      state.students = sorted;
     },
     updateStudent: (state, action) => {
       state.students[action.payload.index] = action.payload.updatedStudent;
