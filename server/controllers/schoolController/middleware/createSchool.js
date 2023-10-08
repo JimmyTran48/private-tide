@@ -22,11 +22,14 @@ const createSchool = async (req, res, next) => {
 
   const query = `
     INSERT INTO schools (name)
-    VALUES ($1);
+    VALUES ($1)
+    RETURNING *
   `;
   const params = [name];
 
-  await db.query(query, params);
+  const school = await db.query(query, params);
+
+  res.locals.school = school.rows[0];
 
   return next();
 };

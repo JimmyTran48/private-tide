@@ -9,7 +9,7 @@ router.get('/', schoolController.getSchools, (req, res) => {
 });
 
 router.post('/', schoolController.createSchool, (req, res) => {
-  return res.sendStatus(201);
+  return res.status(201).json(res.locals.school);
 });
 
 module.exports = router;
