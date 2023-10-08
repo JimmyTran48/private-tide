@@ -10,7 +10,7 @@ const MoneyDisplay = () => {
 
   useEffect(() => {
     const getLessons = async () => {
-      const response = await fetch(`/api/lessons/${teacher_id}`);
+      const response = await fetch(`/api/lessons/all/${teacher_id}`);
       const data = await response.json();
 
       setLessons(data);
