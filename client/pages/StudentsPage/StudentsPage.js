@@ -3,15 +3,18 @@ import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
 
 import { Button, IconButton } from '@mui/material';
-import { InfoOutlined } from '@mui/icons-material';
+import { InfoOutlined, AddCircleOutline } from '@mui/icons-material';
 
+import LessonModal from '../../components/utils/Modals/LessonModal';
 import StudentsModal from '../../components/utils/Modals/StudentsModal';
 import InfoModal from '../../components/utils/Modals/InfoModal';
 
 const StudentsPage = () => {
   const students = useSelector((state) => state.teacher.students);
+
   const [showForm, setShowForm] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const [showLesson, setShowLesson] = useState(false);
 
   const settings = {
     className: 'center',
@@ -44,6 +47,14 @@ const StudentsPage = () => {
       ) : (
         ''
       )}
+      {showLesson !== false && (
+        <LessonModal
+          close={() => {
+            setShowLesson(false);
+          }}
+          student_id={showLesson}
+        />
+      )}
       <div className='w-11/12 mx-auto my-48 p-5 border border-blue-600 rounded-lg bg-blue-100 shadow-lg'>
         <Slider {...settings} className=''>
           {students.map((student, index) => (
@@ -67,6 +78,11 @@ const StudentsPage = () => {
               <h3 className='text-xl font-semibold mb-2'>
                 {student.first_name} {student.last_name}
               </h3>
+              <IconButton
+                className='bg-blue-600 hover:bg-blue-700 text-white rounded'
+                onClick={() => setShowLesson(student.id)}>
+                <AddCircleOutline />
+              </IconButton>
             </div>
           ))}
         </Slider>
