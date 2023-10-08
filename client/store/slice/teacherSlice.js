@@ -17,7 +17,10 @@ export const teacherSlice = createSlice({
       state.schools = action.payload;
     },
     getStudents: (state, action) => {
-      state.students = action.payload;
+      const sorted = [...action.payload].sort((a, b) =>
+        a.first_name.localeCompare(b.first_name)
+      );
+      state.students = sorted;
     },
     addStudents: (state, action) => {
       state.students.push(action.payload);
