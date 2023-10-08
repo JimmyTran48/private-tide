@@ -7,7 +7,10 @@ import LoginModal from '../../utils/Modals/LoginModal';
 import SignupModal from '../../utils/Modals/SignupModal';
 import DetailsModal from '../../utils/Modals/DetailsModal';
 
-import { updateInformation } from '../../../store/slice/teacherSlice';
+import {
+  getStudents,
+  updateInformation,
+} from '../../../store/slice/teacherSlice';
 
 const Navbar = () => {
   const auth = useSelector((state) => state.teacher.information);
@@ -29,6 +32,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(updateInformation(null));
+    dispatch(getStudents([]));
   };
 
   const modal = showLogin ? (
