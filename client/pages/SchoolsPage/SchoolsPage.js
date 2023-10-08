@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import SchoolsModal from '../../components/utils/Modals/SchoolsModal';
 import StudentCount from '../../components/StudentCount';
+import { School } from '@mui/icons-material';
 
 const SchoolsPage = () => {
   const schools = useSelector((state) => state.teacher.schools);
+  const [showForm, setShowForm] = useState(false);
 
   return (
-    <div className='container mx-auto p-4'>
-      <h2 className='text-2xl font-bold mb-4'>Schools</h2>
-      <div className='grid grid-cols-2 gap-4'>
-        {schools.map((school, index) => (
-          <StudentCount key={index} schoolName={school.name} />
-        ))}
+    <React.Fragment>
+      {showForm && (
+        <SchoolsModal
+          close={() => {
+            setShowForm(false);
+          }}
+        />
+      )}
+      <div className='container mx-auto p-4'>
+        <div className='flex justify-between items-center mb-4'>
+          <h2 className='text-2xl font-bold'>Schools</h2>
+          <button
+            className='bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded'
+            onClick={() => {
+              setShowForm(true);
+            }}>
+            Add New School
+          </button>
+        </div>
+        <div className='grid grid-cols-2 gap-4'>
+          {schools.map((school, index) => (
+            <StudentCount key={index} schoolName={school.name} />
+          ))}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
