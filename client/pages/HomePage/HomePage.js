@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import SliderArrow from '../../components/utils/SliderArrow';
 import Slide from '../../components/utils/Slide';
 
-import { updateSchools } from '../../store/slice/teacherSlice';
+import { getSchools } from '../../store/slice/teacherSlice';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const HomePage = () => {
     async function fetchData(dispatch) {
       const response = await fetch('/api/schools');
       const data = await response.json();
-      dispatch(updateSchools(data));
+      dispatch(getSchools(data));
     }
     dispatch(fetchData);
   }, []);

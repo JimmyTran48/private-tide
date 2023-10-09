@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import SchoolsModal from '../../components/utils/Modals/SchoolsModal';
 import StudentCount from '../../components/StudentCount';
-import { School } from '@mui/icons-material';
 
 const SchoolsPage = () => {
   const schools = useSelector((state) => state.teacher.schools);

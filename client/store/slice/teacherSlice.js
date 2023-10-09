@@ -13,8 +13,17 @@ export const teacherSlice = createSlice({
     updateInformation: (state, action) => {
       state.information = action.payload;
     },
+    getSchools: (state, action) => {
+      const sorted = [...action.payload].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      state.schools = sorted;
+    },
     updateSchools: (state, action) => {
-      state.schools = action.payload;
+      const sorted = [...state.schools, action.payload].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      state.schools = sorted;
     },
     getStudents: (state, action) => {
       const sorted = [...action.payload].sort((a, b) =>
@@ -37,6 +46,7 @@ export const teacherSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   updateInformation,
+  getSchools,
   updateSchools,
   getStudents,
   addStudents,
