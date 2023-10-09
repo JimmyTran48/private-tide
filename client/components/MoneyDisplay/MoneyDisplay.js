@@ -1,24 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 
 import calculateBalance from '../../utils/calculateBalance';
 
-const MoneyDisplay = () => {
-  const teacher_id = useSelector((state) => state.teacher.information.id);
-
-  const [lessons, setLessons] = useState([]);
-
-  useEffect(() => {
-    const getLessons = async () => {
-      const response = await fetch(`/api/lessons/all/${teacher_id}`);
-      const data = await response.json();
-
-      setLessons(data);
-    };
-
-    getLessons();
-  }, []);
-
+const MoneyDisplay = ({ lessons }) => {
   const [paid, owed] = calculateBalance(lessons);
 
   return (
