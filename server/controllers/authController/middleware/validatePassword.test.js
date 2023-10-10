@@ -76,7 +76,7 @@ describe('Testing authController validatePassword middleware', () => {
     expect(next).toHaveBeenCalledWith({
       log: 'authController, validatePassword middleware',
       status: 500,
-      message: 'Could not validate user',
+      message: 'Please enter a username and password',
     });
   });
 });

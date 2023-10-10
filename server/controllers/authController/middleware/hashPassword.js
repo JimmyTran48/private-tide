@@ -22,7 +22,12 @@ const hashPassword = async (req, res, next) => {
   try {
     const { password } = req.body;
 
-    if (!password) throw 'no password on request body';
+    if (!password)
+      return next({
+        log: 'authController, hashPassword middleware',
+        status: 500,
+        message: 'Please enter a password',
+      });
 
     const hashedPassword = await bcrypt.hash(password, salt);
 

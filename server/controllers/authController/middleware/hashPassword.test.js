@@ -40,7 +40,7 @@ describe('Testing authController hashPassword middleware', () => {
     expect(next).toHaveBeenCalledWith({
       log: 'authController, hashPassword middleware',
       status: 500,
-      message: 'Could not hash password',
+      message: 'Please enter a password',
     });
   });
 });

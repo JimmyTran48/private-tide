@@ -21,8 +21,13 @@ const db = require('../../../database');
 const validatePassword = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    
-    if (!username || !password) throw 'No username or password';
+
+    if (!username || !password)
+      return next({
+        log: 'authController, validatePassword middleware',
+        status: 500,
+c
+      });
 
     const query = `
     SELECT *
