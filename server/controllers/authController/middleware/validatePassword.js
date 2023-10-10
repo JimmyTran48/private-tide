@@ -28,21 +28,29 @@ const validatePassword = async (req, res, next) => {
   `;
   const params = [username];
 
-  const teacher = await db.query(query, params);
-  const data = teacher.rows[0];
+  try {
+    const teacher = await db.query(query, params);
+    const data = teacher.rows[0];
 
-  const validated = await bcrypt.compare(password, data.password);
+    const validated = await bcrypt.compare(password, data.password);
 
-  if (validated) {
-    res.locals.teacher = data;
-    return next();
+    if (validated) {
+      res.locals.teacher = data;
+      return next();
+    }
+
+    return next({
+      log: 'authController, validatePassword middleware',
+      status: 401,
+      message: 'Incorrect username or password',
+    });
+  } catch {
+    return next({
+      log: 'authController, validatePassword middleware',
+      status: 500,
+      message: 'Could not validate user'
+    });
   }
-
-  return next({
-    log: 'authController, validatePassword middleware',
-    status: 401,
-    message: 'Incorrect username or password',
-  });
 };
 
 module.exports = validatePassword;
