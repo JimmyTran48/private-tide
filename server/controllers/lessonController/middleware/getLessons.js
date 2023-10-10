@@ -4,7 +4,7 @@
  * @module lessonController.getlessons
  *
  * @description
- * Selects all lessons for a specific teacher.
+ * Selects all lessons from a specific student .
  *
  * **************************************************
  */
@@ -18,20 +18,35 @@ const db = require('../../../database');
  */
 
 const getlessons = async (req, res, next) => {
-  const { student_id } = req.params;
+  try {
+    const { student_id } = req.params;
 
-  const query = `
+    if (!student_id)
+      return next({
+        log: 'lessonController, getLessons middleware',
+        status: 500,
+        message: 'Missing fields',
+      });
+
+    const query = `
     SELECT id, lesson_date, payment_status, price
     FROM lessons
     WHERE student_id = $1;
   `;
-  const params = [student_id];
+    const params = [student_id];
 
-  const lessons = await db.query(query, params);
+    const lessons = await db.query(query, params);
 
-  res.locals.lessons = lessons.rows;
+    res.locals.lessons = lessons.rows;
 
-  return next();
+    return next();
+  } catch {
+    return next({
+      log: 'lessonController, getLessons middleware',
+      status: 500,
+      message: 'Could not fetch lessons',
+    });
+  }
 };
 
 module.exports = getlessons;
