@@ -26,7 +26,7 @@ const validatePassword = async (req, res, next) => {
       return next({
         log: 'authController, validatePassword middleware',
         status: 500,
-c
+        message: 'Please enter a username and password',
       });
 
     const query = `
