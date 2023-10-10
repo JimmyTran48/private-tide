@@ -18,21 +18,36 @@ const db = require('../../../database');
  */
 
 const getAllLessons = async (req, res, next) => {
-  const { teacher_id } = req.params;
+  try {
+    const { teacher_id } = req.params;
 
-  const query = `
+    if (!teacher_id)
+      return next({
+        log: 'lessonController, getAllLessons middleware',
+        status: 500,
+        message: 'Missing fields',
+      });
+
+    const query = `
     SELECT student.first_name, student.last_name, lesson.lesson_date, lesson.price, lesson.payment_status
     FROM lessons AS lesson
     JOIN students AS student ON lesson.student_id = student.id
     WHERE lesson.teacher_id = $1
   `;
-  const params = [teacher_id];
+    const params = [teacher_id];
 
-  const lessons = await db.query(query, params);
+    const lessons = await db.query(query, params);
 
-  res.locals.lessons = lessons.rows;
+    res.locals.lessons = lessons.rows;
 
-  return next();
+    return next();
+  } catch {
+    return next({
+      log: 'lessonController, getAllLessons middleware',
+      status: 500,
+      message: 'Could not fetch lessons',
+    });
+  }
 };
 
 module.exports = getAllLessons;
