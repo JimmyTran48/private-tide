@@ -16,6 +16,7 @@ describe('Testing authController validatePassword middleware', () => {
   it('should handle a correct password', async () => {
     const req = {
       body: {
+        username: 'testUser',
         password: 'testPassword',
       },
     };
@@ -40,6 +41,7 @@ describe('Testing authController validatePassword middleware', () => {
   it('should handle an incorrect password', async () => {
     const req = {
       body: {
+        username: 'testUser',
         password: 'testPassword',
       },
     };
@@ -57,6 +59,24 @@ describe('Testing authController validatePassword middleware', () => {
       log: 'authController, validatePassword middleware',
       status: 401,
       message: 'Incorrect username or password',
+    });
+  });
+
+  it('should throw an error when username or password is not on req.body', async () => {
+    const req = {
+      body: {},
+    };
+    const res = {
+      locals: {},
+    };
+    const next = jest.fn();
+
+    await validatePassword(req, res, next);
+
+    expect(next).toHaveBeenCalledWith({
+      log: 'authController, validatePassword middleware',
+      status: 500,
+      message: 'Could not validate user',
     });
   });
 });

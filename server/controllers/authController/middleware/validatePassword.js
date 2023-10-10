@@ -19,16 +19,18 @@ const db = require('../../../database');
  */
 
 const validatePassword = async (req, res, next) => {
-  const { username, password } = req.body;
+  try {
+    const { username, password } = req.body;
+    
+    if (!username || !password) throw 'No username or password';
 
-  const query = `
+    const query = `
     SELECT *
     FROM TEACHERS
     WHERE username = $1
   `;
-  const params = [username];
+    const params = [username];
 
-  try {
     const teacher = await db.query(query, params);
     const data = teacher.rows[0];
 
@@ -48,7 +50,7 @@ const validatePassword = async (req, res, next) => {
     return next({
       log: 'authController, validatePassword middleware',
       status: 500,
-      message: 'Could not validate user'
+      message: 'Could not validate user',
     });
   }
 };
