@@ -19,13 +19,23 @@ const salt = 10;
  */
 
 const hashPassword = async (req, res, next) => {
-  const { password } = req.body;
+  try {
+    const { password } = req.body;
 
-  const hashedPassword = await bcrypt.hash(password, salt);
+    if (!password) throw 'no password on request body';
 
-  res.locals.hashedPassword = hashedPassword;
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-  return next();
+    res.locals.hashedPassword = hashedPassword;
+
+    return next();
+  } catch {
+    return next({
+      log: 'authController, hashPassword middleware',
+      status: 500,
+      message: 'Could not hash password',
+    });
+  }
 };
 
 module.exports = hashPassword;
