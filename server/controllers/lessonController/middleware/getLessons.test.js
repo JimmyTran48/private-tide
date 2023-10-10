@@ -35,8 +35,6 @@ describe('Testing lessonController getLessons middleware', () => {
     };
     const next = jest.fn();
 
-    const params = [req.params.student_id];
-
     await getLessons(req, res, next);
 
     expect(next).toHaveBeenCalledWith({
