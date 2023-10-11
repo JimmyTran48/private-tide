@@ -20,19 +20,27 @@ const db = require('../../../database');
  */
 
 const createStudent = async (req, res, next) => {
-  const {
-    first_name,
-    last_name,
-    school_id,
-    teacher_id,
-    instrument,
-    email,
-    phone_number,
-  } = req.body;
+  try {
+    const {
+      first_name,
+      last_name,
+      school_id,
+      teacher_id,
+      instrument,
+      email,
+      phone_number,
+    } = req.body;
 
-  const id = uuidv4();
+    if ((!first_name, !last_name, !school_id, !teacher_id, !instrument))
+      return next({
+        log: 'studentController, createStudent middleware',
+        status: 500,
+        message: 'Missing fields',
+      });
 
-  const query = `
+    const id = uuidv4();
+
+    const query = `
   WITH inserted_student AS (
     INSERT INTO students (id, first_name, last_name, school_id, teacher_id, instrument, email, phone_number)
     VALUES($1, $2, $3, $4, $5, $6, $7, $8)
@@ -54,21 +62,28 @@ const createStudent = async (req, res, next) => {
     schools ON inserted_student.school_id = schools.id;
     `;
 
-  const params = [
-    id,
-    first_name,
-    last_name,
-    school_id,
-    teacher_id,
-    instrument,
-    email,
-    phone_number,
-  ];
+    const params = [
+      id,
+      first_name,
+      last_name,
+      school_id,
+      teacher_id,
+      instrument,
+      email,
+      phone_number,
+    ];
 
-  const student = await db.query(query, params);
-  res.locals.student = student.rows[0];
+    const student = await db.query(query, params);
+    res.locals.student = student.rows[0];
 
-  return next();
+    return next();
+  } catch {
+    return next({
+      log: 'studentController, createStudent middleware',
+      status: 500,
+      message: 'Could not create student',
+    });
+  }
 };
 
 module.exports = createStudent;
