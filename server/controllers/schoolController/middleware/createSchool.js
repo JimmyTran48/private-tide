@@ -23,7 +23,7 @@ const createSchool = async (req, res, next) => {
 
     if (!name)
       return next({
-        log: 'schoolController, schoolLesson middleware',
+        log: 'schoolController, createSchool middleware',
         status: 500,
         message: 'Missing fields',
       });
@@ -42,7 +42,7 @@ const createSchool = async (req, res, next) => {
     return next();
   } catch {
     return next({
-      log: 'schoolController, schoolLesson middleware',
+      log: 'schoolController, createSchool middleware',
       status: 500,
       message: 'Could not create school',
     });

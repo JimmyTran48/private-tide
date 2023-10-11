@@ -18,16 +18,24 @@ const db = require('../../../database');
  */
 
 const getSchools = async (req, res, next) => {
-  const query = `
+  try {
+    const query = `
     SELECT name, id
     FROM SCHOOLS;
   `;
 
-  const schools = await db.query(query);
+    const schools = await db.query(query);
 
-  res.locals.schools = schools.rows;
+    res.locals.schools = schools.rows;
 
-  return next();
+    return next();
+  } catch {
+    return next({
+      log: 'schoolController, getSchools middleware',
+      status: 500,
+      message: 'Missing fields',
+    });
+  }
 };
 
 module.exports = getSchools;

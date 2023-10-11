@@ -38,7 +38,7 @@ describe('Testing schoolController createSchool middleware', () => {
     await createSchool(req, res, next);
 
     expect(next).toHaveBeenCalledWith({
-      log: 'schoolController, schoolLesson middleware',
+      log: 'schoolController, createSchool middleware',
       status: 500,
       message: 'Missing fields',
     });
