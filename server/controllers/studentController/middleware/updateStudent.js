@@ -18,12 +18,20 @@ const db = require('../../../database');
  */
 
 const updateStudent = async (req, res, next) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const { school_id, lesson_status, payment_method, email, phone_number } =
-    req.body;
+    const { school_id, lesson_status, payment_method, email, phone_number } =
+      req.body;
 
-  const query = `
+    if ((!id || !school_id, !lesson_status, !payment_method))
+      return next({
+        log: 'studentController, updateStudent middleware',
+        status: 500,
+        message: 'Missing fields',
+      });
+
+    const query = `
   WITH updated_student AS (
     UPDATE students
     SET school_id = $2, lesson_status = $3, payment_method = $4, email = $5, phone_number = $6
@@ -45,20 +53,27 @@ const updateStudent = async (req, res, next) => {
   JOIN 
     schools ON updated_student.school_id = schools.id;
     `;
-  const params = [
-    id,
-    school_id,
-    lesson_status,
-    payment_method,
-    email,
-    phone_number,
-  ];
+    const params = [
+      id,
+      school_id,
+      lesson_status,
+      payment_method,
+      email,
+      phone_number,
+    ];
 
-  const updated_student = await db.query(query, params);
+    const updated_student = await db.query(query, params);
 
-  res.locals.student = updated_student.rows[0];
+    res.locals.student = updated_student.rows[0];
 
-  return next();
+    return next();
+  } catch {
+    return next({
+      log: 'studentController, updateStudent middleware',
+      status: 500,
+      message: 'Could not update student',
+    });
+  }
 };
 
 module.exports = updateStudent;
